@@ -1,0 +1,3 @@
+# 500px Golang Client
+
+Learning languages is most easily done through re-implementing previous work. So instead of wasting time and not producing anything of value, I'm making a 500px Golang client. If you see unidiomatic Go code please either raise an issue or send a pull request.
