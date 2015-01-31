@@ -6,7 +6,6 @@ import (
 	"github.com/zachaysan/fhp"
 )
 
-func TestPhoto(t *testing.T) {
-	placeholder_photo_id := "1234"
-	fhp.Photo(placeholder_photo_id)
+func TestRun(t *testing.T) {
+	fhp.Run()
 }
