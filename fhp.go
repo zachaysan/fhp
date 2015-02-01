@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strconv"
 
 	"github.com/ChimeraCoder/tokenbucket"
 	"github.com/garyburd/go-oauth/oauth"
@@ -119,9 +118,7 @@ func get_final_tokens() {
 
 func (fhpApi *FhpApi) throttledQuery() {
 	for query := range fhpApi.queryQueue {
-		fmt.Println("throttled query")
 		response_ch := query.response_ch
-		fmt.Println(query.url)
 		err := fhpApi.execQuery(query.url,
 			query.form,
 			query.data,
@@ -177,22 +174,6 @@ func NewFhpApi() *FhpApi {
 	return fhpApi
 }
 
-func (fhpApi *FhpApi) GetPhoto(photo_id int) (photoResp PhotoResp, err error) {
-
-	// Replace with actual url values
-	values := url.Values{}
-
-	response_ch := make(chan response)
-
-	fhpApi.queryQueue <- query{BaseUrl + "/v1/photos/" + strconv.Itoa(photo_id),
-		values,
-		&photoResp,
-		HTTP_GET,
-		response_ch}
-
-	return photoResp, (<-response_ch).err
-}
-
 func decodeResponse(resp *http.Response, data interface{}) error {
 	if resp.StatusCode != 200 {
 		fmt.Println("Status code not 200", resp.StatusCode)
@@ -203,10 +184,12 @@ func decodeResponse(resp *http.Response, data interface{}) error {
 
 func Run() {
 	fhpApi := NewFhpApi()
-	photoResp, err := fhpApi.GetPhoto(4928401)
-	fmt.Println("finishing Run")
-	fmt.Println(err)
-	fmt.Println(photoResp)
+	values := url.Values{}
+	values.Set("comments", "true")
+
+	photoResp, err := fhpApi.GetPhoto(4928401, values)
+	fmt.Println("errors:", err)
+	fmt.Printf("%+v\n", photoResp)
 }
 
 func AuthorizationURL(callback string) (string, *oauth.Credentials, error) {
