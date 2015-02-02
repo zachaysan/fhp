@@ -132,5 +132,5 @@ func decodeResponse(resp *http.Response, data interface{}) error {
 }
 
 func Run() {
-	photoSearchExample()
+	photoSearchByGeoExample()
 }
