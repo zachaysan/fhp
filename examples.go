@@ -25,3 +25,27 @@ func photoSearchExample() {
 	fmt.Println("errors:", err)
 	fmt.Printf("%+v\n", photoSearchResp)
 }
+
+func photoSearchByTagExample() {
+	fhpApi := NewFhpApi()
+	values := url.Values{}
+
+	photoSearchResp, err := fhpApi.SearchPhotosByTag("bike", values)
+	fmt.Println("errors:", err)
+	fmt.Printf("%+v\n", photoSearchResp)
+}
+
+func photoSearchByGeoExample() {
+
+	// CN Tower
+	latitude := 43.642566
+	longitude := -79.387057
+	radius := "1km"
+
+	fhpApi := NewFhpApi()
+	values := url.Values{}
+
+	photoSearchResp, err := fhpApi.SearchPhotosByGeo(latitude, longitude, radius, values)
+	fmt.Println("errors:", err)
+	fmt.Printf("%+v\n", photoSearchResp)
+}
