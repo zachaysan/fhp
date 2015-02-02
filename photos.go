@@ -27,6 +27,22 @@ func (fhpApi *FhpApi) SearchPhotosByTerm(term string,
 	return searchPhotos(fhpApi, values)
 }
 
+func (fhpApi *FhpApi) SearchPhotosByTag(tag string,
+	values url.Values) (photoSearchResp PhotoSearchResp, err error) {
+
+	values.Set("tag", tag)
+
+	return searchPhotos(fhpApi, values)
+}
+
+func (fhpApi *FhpApi) SearchPhotosByGeo(latitude float64, longitude float64,
+	radius string, values url.Values) (photoSearchResp PhotoSearchResp, err error) {
+
+	values.Set("geo", strconv.FormatFloat(latitude, 'f', 6, 64)+","+strconv.FormatFloat(longitude, 'f', 6, 64)+","+radius)
+
+	return searchPhotos(fhpApi, values)
+}
+
 func searchPhotos(fhpApi *FhpApi,
 	values url.Values) (photoSearchResp PhotoSearchResp, err error) {
 
