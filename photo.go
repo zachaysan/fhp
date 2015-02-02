@@ -46,3 +46,11 @@ type PhotoResp struct {
 	Photo    photo
 	Comments []comment
 }
+
+type PhotoSearchResp struct {
+	CurrentPage int `json:"current_page"`
+	TotalPages  int `json:"total_pages"`
+	TotalItems  int `json:"total_items"`
+
+	Photos []photo
+}
