@@ -132,11 +132,5 @@ func decodeResponse(resp *http.Response, data interface{}) error {
 }
 
 func Run() {
-	fhpApi := NewFhpApi()
-	values := url.Values{}
-	values.Set("comments", "true")
-
-	photoResp, err := fhpApi.GetPhoto(4928401, values)
-	fmt.Println("errors:", err)
-	fmt.Printf("%+v\n", photoResp)
+	photoSearchExample()
 }
