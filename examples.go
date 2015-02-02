@@ -21,7 +21,7 @@ func photoSearchExample() {
 	values.Set("only", "Black and White")
 	values.Set("image_size", "4")
 
-	photoSearchResp, err := fhpApi.SearchPhotosTerm("bike", values)
+	photoSearchResp, err := fhpApi.SearchPhotosByTerm("bike", values)
 	fmt.Println("errors:", err)
 	fmt.Printf("%+v\n", photoSearchResp)
 }
